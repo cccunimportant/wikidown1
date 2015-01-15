@@ -9,6 +9,7 @@ var serveIndex = require('serve-index');
 
 var app = express();
 var pubDir = path.join(__dirname, 'public');
+var imgDir = path.join(__dirname, 'img');
 var dbDir  = path.join(__dirname, 'db');
 
 app.use(cookieParser());
@@ -16,6 +17,8 @@ app.use(session({secret: '@#$TYHaadfa1', resave: false, saveUninitialized: true}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public/', express.static(pubDir));
 app.use('/public/', serveIndex(pubDir, {'icons': true}));
+app.use('/img/', express.static(imgDir));
+app.use('/img/', serveIndex(imgDir, {'icons': true}));
 
 function response(res, code, msg) {
   res.set('Content-Type', 'text/plain').status(code).send(msg).end();

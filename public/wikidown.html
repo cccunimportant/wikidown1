@@ -15,7 +15,10 @@
           <span class="icon-bar"></span>
         </button>
         <div class="navbar-header">
-          <a class="navbar-brand" href="#main" style="color:#cccc33"><span class="glyphicon glyphicon-home"></span></a>
+          <a class="navbar-brand" href="#main" style="color:#C0C0C0">
+		    <span class="glyphicon glyphicon-home"></span> &nbsp; 
+		    <span id="title">home</span>
+	      </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -40,10 +43,13 @@
       </div>
     </center>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Showdown.min.js"></script>
+    <script src="js/Showdown_table.min.js"></script>
+	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 <script>
-DB = { 
-  db:"md",
-}
+DB = { db:"md" };
 
 DB.save=function(name, doc) {
   $.ajax({
@@ -67,19 +73,31 @@ DB.load=function(name) {
   });
 }
 
-var filename, converter;
+var filename, converter, title;
+
 function load() {
   converter = new Showdown.converter({ extensions: ['table'] });
   if (window.location.hash === '')
     filename = $('#filename').val();
   else
     filename = window.location.hash.substring(1);
-  showFile(filename);
+  DB.load("title").done(function(title) {
+    $('#title').html(title);
+  });
+  $('#filename').keypress(function(e) {
+  if (e.which == '13') {
+     e.preventDefault();
+     loadFile();
+   }
+  });
+  showFile(filename);  
 }
 
 function mdToHtml(md) {
-  md  = md.replace(/\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>');
-  md  = md.replace(/\[\[([^\]]+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>');
+  md  = md.replace(/\!\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<div class="figure"><img src="../img/$2"/><p class="caption">$1</p></div>'); // 內部圖片 ![[text]](file)
+  md  = md.replace(/\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>'); // 內部連結 [[text]](file)
+  md  = md.replace(/\[\[([^\]]+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>'); // 內部連結 [[file]]
+  md  = md.replace(/\s\$([^$]+?)\$\s/gi, '<script type="math/tex">$1</'+'script> ');// 數學式
   return converter.makeHtml(md);
 }
 
@@ -88,6 +106,7 @@ function show(md) {
   var html = mdToHtml(md);
   $('#htmlBox').html(html);
   switchPanel('showPanel');
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub, "htmlBox"]);
 }
 
 var mdNewFile = '# 標題：文件不存在\n\n您可以編輯後存檔！\n## 語法\n* [[內部連結]](innerLink)\n* [外部連結](link)';
@@ -131,9 +150,5 @@ window.onhashchange = function () {
 
 window.onbeforeunload = function(){}
 </script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/Showdown.min.js"></script>
-    <script src="js/Showdown_table.min.js"></script>
 </body>
 </html>
