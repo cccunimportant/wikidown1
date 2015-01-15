@@ -78,8 +78,8 @@ function load() {
 }
 
 function mdToHtml(md) {
-  md  = md.replace(/\[\[(.+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>');
-  md  = md.replace(/\[\[(.+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>');
+  md  = md.replace(/\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>');
+  md  = md.replace(/\[\[([^\]]+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>');
   return converter.makeHtml(md);
 }
 
