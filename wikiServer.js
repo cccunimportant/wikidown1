@@ -19,7 +19,7 @@ app.use('/public/', serveIndex(pubDir, {'icons': true}));
 
 function response(res, code, msg) {
   res.set('Content-Type', 'text/plain').status(code).send(msg).end();
-  c.log("=====response=====\n"+code+":"+msg);
+  c.log("response: code="+code+"\n");
 }
 
 app.get("/", function(req, res) {

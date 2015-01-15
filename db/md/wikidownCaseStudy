@@ -10,7 +10,7 @@ Wikidown 採取單頁應用 (Single Page Application) 的設計模式，而且�
 
 舉例而言、wikidown 在 github pages 上的首頁為 <http://ccckmit.github.io/wikidown1/public/wikidown.html> ，您點選後就可以看到 wikidown.html 以單純網頁 (無 wikiServer 伺服器) 的形式在執行的情況。在這種情況下，我們可以檢視那些已經寫好的 markdown 文件，而 wikidown.html 會透過 jQuery.ajax() 函數向一般性的網頁伺服器請求取得 markdown 文件後，利用 showdown 這個開放原始碼專案將 markdown 文件轉換成 html 並顯示在畫面上。
 
-但是如果我們用 node wikiServer 指令啟動本機伺服端，就可以訪問 http://localhost:3000/ 以檢視 wikidown 系統，並且可以進行存檔，檔案的網址在 `db/md/<filename>` 這樣的路徑底下，您可以利用 wikidown 來編輯出整個維基網站。
+但是如果我們用 node wikiServer 指令啟動本機伺服端，就可以訪問 `http://localhost:3000/` 以檢視 wikidown 系統，並且可以進行存檔，檔案的網址在 `db/md/<filename>` 這樣的路徑底下，您可以利用 wikidown 來編輯出整個維基網站。
 
 不過在第一版的  wikidown 系統中，我們並沒有提供「認證與登入登出」的帳戶功能，因此任何人都可以進來編輯。所以第一版比較適合用來安裝在自己的電腦撰寫個人的維基型網誌，但是不適合用來架站給很多使用者使用。
 
