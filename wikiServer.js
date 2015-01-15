@@ -22,6 +22,10 @@ function response(res, code, msg) {
   c.log("=====response=====\n"+code+":"+msg);
 }
 
+app.get("/", function(req, res) {
+  res.redirect('/public/wikidown.html');
+});
+
 app.get("/db/:db/:name", function(req, res) {
   var db = req.params.db;
   var name = req.params.name;

@@ -4,6 +4,7 @@
 * 在離線執行時，[[wikidown]] 會將資料暫存在瀏覽器的 [localstorage](http://zh.wikipedia.org/wiki/%E7%BD%91%E9%A1%B5%E5%AD%98%E5%82%A8) 儲存空間中，一旦連上伺服器之後，資料就會被寫回伺服器以檔案的形式保存。
 * 於是您在連線或離線的情況下都可以使用 [[wikidown]] 系統，如果您安裝了 [node.js]，也可以輕易的將 [[wikidown]]  架設在自己的電腦中執行，這樣就可以將編輯的檔案立刻儲存在自己的電腦中了。
 * 顯示時 [[正藍色]](blue) 代表內部連結，[淡藍色](http://www.rapidtables.com/web/color/RGB_Color.htm) 代表外部連結。
+* Wikidown 的原始碼與解說請參考 -- [[wikidownCaseStudy]] 
 
 作者：[[陳鍾誠]](ccckmit)
 
