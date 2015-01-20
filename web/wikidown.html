@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
   <link href="main.css" rel="stylesheet">
 </head>
-<body onload="load()">
+<body onload="init()">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -27,7 +27,7 @@
 	      <button class="btn btn-success" type="button" onclick="show()">預覽</button>
               <button class="btn btn-success" type="button" onclick="edit()">編輯</button>
               <input id="filename" type="text" class="form-control" placeholder="filename" aria-describedby="basic-addon1" value="main">
-	      <button class="btn btn-success" type="button" onclick="loadFile()">載入</button>
+	      <button class="btn btn-success" type="button" onclick="load()">載入</button>
               <button class="btn btn-success" type="button" onclick="saveFile()">儲存</button>
 			</div>
           </form>
@@ -80,7 +80,7 @@ DB.load=function(name) {
 
 var filename, converter, title;
 
-function load() {
+function init() {
   converter = new Showdown.converter({ extensions: ['table'] });
   if (window.location.hash === '')
     filename = $('#filename').val();
@@ -126,6 +126,11 @@ function show() {
   });
   switchPanel('showPanel');
   MathJax.Hub.Queue(["Typeset",MathJax.Hub, "htmlBox"]);
+}
+
+function load() {
+  filename = $('#filename').val();
+  loadFile(filename);
 }
 
 function loadFile(filename) {
