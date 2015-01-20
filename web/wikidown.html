@@ -72,7 +72,7 @@ DB.save=function(name, doc) {
 DB.load=function(name) {
   return $.ajax({
     type: "GET",
-    url: "/web/"+DB.db+"/"+name,
+    url: "./"+DB.db+"/"+name,
 	timeout:2000,
     data: {}
   });
