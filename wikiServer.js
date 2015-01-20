@@ -8,25 +8,22 @@ var session = require('express-session');
 var serveIndex = require('serve-index');
 
 var app = express();
-var pubDir = path.join(__dirname, 'public');
-var imgDir = path.join(__dirname, 'img');
-var dbDir  = path.join(__dirname, 'db');
+var webDir = path.join(__dirname, 'web');
+var dbDir = webDir;
 
 app.use(cookieParser());
 app.use(session({secret: '@#$TYHaadfa1', resave: false, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/public/', express.static(pubDir));
-app.use('/public/', serveIndex(pubDir, {'icons': true}));
-app.use('/img/', express.static(imgDir));
-app.use('/img/', serveIndex(imgDir, {'icons': true}));
+app.use('/web/', express.static(webDir));
+app.use('/web/', serveIndex(webDir, {'icons': true}));
 
 function response(res, code, msg) {
-  res.set('Content-Type', 'text/plain').status(code).send(msg).end();
+  res.set('Content-Length', ''+msg.length).set('Content-Type', 'text/plain').status(code).send(msg).end();
   c.log("response: code="+code+"\n");
 }
 
 app.get("/", function(req, res) {
-  res.redirect('/public/wikidown.html');
+  res.redirect('/web/wikidown.html');
 });
 
 app.get("/db/:db/:name", function(req, res) {
@@ -45,6 +42,7 @@ app.post("/db/:db/:name", function(req, res) {
   var name = req.params.name;
   var obj = req.body.obj;
   var msg = "db:"+db+" name:"+name+"\n"+obj;
+  c.log(msg);
   fs.writeFile(dbDir+"/"+db+"/"+name, obj, function(err) {
     if (err)
       response(res, 500, 'write fail!');
