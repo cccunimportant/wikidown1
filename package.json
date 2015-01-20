@@ -4,11 +4,11 @@
   "description": "A static server based on express",
   "main": "staticServer.js",
   "dependencies": {
-    "serve-index": "",
-    "body-parser": "^1.4.3",
-    "cookie-parser": "",
-    "express-session":"",
-    "express": "^4.4.5"
+    "serve-index": "~1.6.0",
+    "body-parser": "^1.10.1",
+    "cookie-parser": "1.3.3",
+    "express-session":"1.10.1",
+    "express": "4.11.0"
   },
   "devDependencies": {},
   "scripts": {

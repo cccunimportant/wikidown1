@@ -104,7 +104,7 @@ function switchPanel(name) {
 }
 
 function mdToHtml(md) {
-  md  = md.replace(/\!\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<div class="figure"><img src="../img/$2"/><p class="caption">$1</p></div>'); // 內部圖片 ![[text]](file)
+  md  = md.replace(/\!\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<div class="figure"><img src="img/$2"/><p class="caption">$1</p></div>'); // 內部圖片 ![[text]](file)
   md  = md.replace(/\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>'); // 內部連結 [[text]](file)
   md  = md.replace(/\[\[([^\]]+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>'); // 內部連結 [[file]]
   md  = md.replace(/\s\$\$([^$]+?)\$\$\s/gi, '<script type="math/tex">$1</'+'script> ');// 數學式 $$[latex]$$
