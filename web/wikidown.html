@@ -92,6 +92,7 @@ function init() {
   $('#filename').keypress(function(e) {
   if (e.which == '13') {
      e.preventDefault();
+     filename = $('#filename').val();
      loadFile(filename);
    }
   });
@@ -104,10 +105,11 @@ function switchPanel(name) {
 }
 
 function mdToHtml(md) {
-  md  = md.replace(/\!\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<div class="figure"><img src="img/$2"/><p class="caption">$1</p></div>'); // 內部圖片 ![[text]](file)
-  md  = md.replace(/\[\[([^\]]+?)\]\]\((.*?)\)/gi, '<a href="#$2" class="innerLink">$1</a>'); // 內部連結 [[text]](file)
-  md  = md.replace(/\[\[([^\]]+?)\]\]/gi, '<a href="#$1" class="innerLink">$1</a>'); // 內部連結 [[file]]
-  md  = md.replace(/\s\$\$([^$]+?)\$\$\s/gi, '<script type="math/tex">$1</'+'script> ');// 數學式 $$[latex]$$
+  md  = "\n"+md+"\n"; 
+  md  = md.replace(/(\s)\!\[\[([^\]]+?)\]\]\((.*?)\)(\s)/gmi, '$1<div class="figure"><img src="img/$3"/><p class="caption">$2</p></div>$4'); // 內部圖片 ![[text]](file)
+  md  = md.replace(/(\s)\[\[([^\]]+?)\]\]\((.*?)\)(\s)/gi, '$1<a href="#$3" class="innerLink">$2</a>$4'); // 內部連結 [[text]](file)
+  md  = md.replace(/(\s)\[\[([^\]]+?)\]\](\s)/gi, '$1<a href="#$2" class="innerLink">$2</a>$3'); // 內部連結 [[file]]
+  md  = md.replace(/(\s)\$\$([^$]+?)\$\$(\s)/gi, '$1<script type="math/tex">$2</'+'script>$3');// 數學式 $$[latex]$$
   return converter.makeHtml(md);
 }
 
