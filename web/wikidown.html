@@ -72,7 +72,7 @@ DB.save=function(name, doc) {
 DB.load=function(name) {
   return $.ajax({
     type: "GET",
-    url: "/db/"+DB.db+"/"+name,
+    url: "/web/"+DB.db+"/"+name,
 	timeout:2000,
     data: {}
   });
@@ -144,13 +144,6 @@ function loadFile(filename) {
   });
 }
 
-/*
-function loadFile() {
-  filename = $('#filename').val();
-  showFile(filename);
-  switchPanel('showPanel');
-}
-*/
 function saveFile() {
   var md = $('#mdBox').val();
   DB.save(filename, md);
