@@ -1,8 +1,8 @@
 {
-  "name": "staticServer",
-  "version": "0.0.0",
-  "description": "A static server based on express",
-  "main": "staticServer.js",
+  "name": "wikidown",
+  "version": "1.0.0",
+  "description": "Wikidown = wiki+markdown",
+  "main": "wikiServer.js",
   "dependencies": {
     "serve-index": "",
     "body-parser": "^1.4.3",
@@ -13,20 +13,20 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node staticServer.js"
+    "start": "node wikiServer.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ccckmit/staticServer.git"
+    "url": "https://github.com/ccckmit/markdown1.git"
   },
   "keywords": [
-    "server",
-    "tutorial",
-    "example"
+    "wiki",
+    "markdown",
+    "blog"
   ],
   "author": "ccckmit",
   "bugs": {
-    "url": "https://github.com/ccckmit/staticServer/issues"
+    "url": "https://github.com/ccckmit/markdown1/issues"
   },
-  "homepage": "https://github.com/staticServer/staticServer"
+  "homepage": "https://github.com/ccckmit/wikidown1"
 }

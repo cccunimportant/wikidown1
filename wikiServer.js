@@ -51,6 +51,7 @@ app.post("/db/:db/:name", function(req, res) {
   })
 });
 
-app.listen(3000);
+var port = process.env.PORT || 3000; // process.env.PORT for Heroku
+app.listen(port);
 
-console.log('Server started: http://localhost:3000/');
+console.log('Server started: http://localhost:'+port);
